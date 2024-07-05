@@ -18,10 +18,16 @@ jobs:
       steps:
         - name: View SW version
           run: sw_vers
+
+    separate-parallel-job:
+      runs-on: ubuntu-latest
+      steps:
+        - name: echo a string
+          run: echo "Hello, world! as a string"
+
     dependent-job:
       runs-on: windows-latest
       needs: [run-shell-commands, parallel-job-macOS]
       steps:
         - name: echo a string
-          run: Write-OutPut "Hello, world! as a Windows String"
-          
+          run: Write-Output "Hello, world! as a Windows String"

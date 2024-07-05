@@ -1,0 +1,103 @@
+
+#YAML intro
+
+# Comments in YAML start with the # character
+# Key value pairs are separated by a colon
+key: values
+"key with quotes": "value with quotes"
+323: 3342
+
+# Special characters can include !@#$%^&*()_+{}[]|;':",.<>?
+special_characters: "value with special characters !@#$%^&*()_+"
+single_quotes: "value with single quotes '"
+double_quotes: "value with double quotes \""
+other_unicode: "value with unicode characters 😊 or \u263B"
+
+# Lists or arrays (sequences) are represented by a dash followed by a space
+list:
+  - item1
+  - item2
+  - item3
+
+array:
+  - 1
+  - 2
+  - 3
+
+# JSON arrays can be represented as a list of objects
+json array: [hello, world]
+
+numbers: 100
+boolean: true
+null: null
+also null: ~
+
+# objects (maps) are represented by key value pairs
+object (maps):
+  key: value
+  key2: value2
+  nested object:
+    nested key: nested value
+
+json style object: {
+    "key": "value",
+    "key2": "value2",
+    "nested object": {
+      "nested key": "nested value"
+    }
+  }
+
+# Nested objects can be represented by indenting the key value pairs
+sequebce:
+  - item1
+  - item2 
+  - key: value
+  - key2: value2
+  - 0.5
+  - nested object:
+      - nested key: nested value
+      - - another nested key: another nested value
+      - - - yet another nested key: yet another nested value
+      - - - - even more nested key: even more nested value
+
+# Literal block scalar style
+literal blow: |
+  This is a literal block scalar style
+  It preserves newlines and leading spaces
+  without interpreting escape sequences
+
+# Folded block scalar style
+folded block: >
+  This is a folded block scalar style
+
+  It preserves newlines but removes leading spaces
+  and interprets escape sequences
+
+# To remove new line characters, use a backslash followed by a -
+literal block without new lines at the end: |-
+  This is a literal block scalar style
+  with new lines
+  asdf
+ 
+folded block without new lines at the end: >-
+  This is a folded block scalar style
+
+  It preserves newlines but removes leading spaces
+  and interprets escape sequences
+
+# To preserve all new lines, use a backslash followed by a +
+literal block with new lines at the end: |+
+  This is a literal block scalar style
+  with new lines
+  asdf
+
+
+folded block with new lines at the end: >+
+  This is a folded block scalar style
+
+  It preserves newlines but removes leading spaces
+
+
+  and interprets escape sequences
+
+

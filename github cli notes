@@ -1,0 +1,35 @@
+GitHub CLI
+
+AVAILABLE COMMANDS
+  disable:     Disable a workflow - prevents it from running 
+  enable:      Enable a workflow
+  list:        List workflows
+  run:         Run a workflow by creating a workflow_dispatch event - 'workflow_dispatch' trigger is necessary to be able to use this command
+  view:        View the summary of a workflow
+
+To check on workflows using the github cli:
+
+`gh workflow view "Name of Workflow"`
+
+ - this will give you something like:
+
+First Workflow - first-workflow.yaml
+ID: 105803331
+
+Total runs 7
+Recent runs
+   TITLE                       WORKFLOW        BRANCH  EVENT  ID        
+✓  adding more dependent jobs  First Workflow  main    push   9801864378
+✓  adding more dependent jobs  First Workflow  main    push   9801854811
+✓  adding another action       First Workflow  main    push   9801833934
+✓  updating the removal        First Workflow  main    push   9801803197
+✓  adding actions              First Workflow  main    push   9801796404
+
+To list out the available workflows:
+
+`gh workflow list`
+
+NAME            STATE   ID       
+First Workflow  active  105803331
+
+ - you can use the ID instead of the name and get the same results

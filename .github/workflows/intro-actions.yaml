@@ -16,5 +16,5 @@ jobs:
         with:
           who-to-greet: 'Mona the Octocat'
       - name: Log Greeting
-        run: echo "The greeting was '${{ steps.first-action-use.outputs.greeting }}'\nThe time was: '${{ steps.first-action-use.outputs.time }}'"
+        run: echo "The time was '${{ steps.first-action-use.outputs.time }}'"
 

@@ -1,6 +1,12 @@
 
 name: Working Directory and Shells
 on: [push]
+# The defaults keyword is used to set default values for jobs and steps.
+defaults:
+    run:
+        shell: bash
+        # Setting the working directory for all jobs and steps in the workflow.
+        # working-directory: ./src
 jobs:
     display-working-directory:
         runs-on: ubuntu-latest
@@ -13,8 +19,15 @@ jobs:
                 echo $GITHUB_REPOSITORY
                 echo $GITHUB_ACTOR
                 echo $GITHUB_WORKSPACE
+            - name: Change Working Directory
+              working-directory: /home/runner
+              run: pwd
     display-working-directory-windows:
         runs-on: windows-latest
+        # The defaults keyword is used to set default values for jobs and steps. This will override the defaults set at the top level.
+        defaults:
+            run:
+                shell: powershell
         steps:
             - name: Display the working directory & lists files
               run: |
@@ -24,4 +37,14 @@ jobs:
                 echo $env:GITHUB_REPOSITORY
                 echo $env:GITHUB_ACTOR
                 echo $env:GITHUB_WORKSPACE
+            - name: Python Shell
+              # Specifying the shell to use for a step. This will override the defaults set at the job level.
+              shell: python
+              run: |
+                import platform
+                print("Hello, world!")
+                print("This is a Python shell")
+                print("It has multiple lines")
+                print("And it is echoed")
+                print(platform.processor())
     

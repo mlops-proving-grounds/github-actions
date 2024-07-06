@@ -19,6 +19,7 @@ jobs:
                 echo $GITHUB_REPOSITORY
                 echo $GITHUB_ACTOR
                 echo $GITHUB_WORKSPACE
+            # Changing the working directory for a step.
             - name: Change Working Directory
               working-directory: /home/runner
               run: pwd

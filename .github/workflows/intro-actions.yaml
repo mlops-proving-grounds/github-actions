@@ -1,0 +1,17 @@
+
+name: Actions Introduction
+on: [push]
+
+jobs:
+  first-action-use:
+    runs-on: ubuntu-latest
+    steps:
+      - name: First Action Use
+        # This uses the action in the .github/actions/first-action directory
+        # uses: .github/actions/first-action@main
+        # After the @ symbol, you can specify a branch, tag, or commit SHA
+        uses: actions/hello-world-javascript-action@main
+        # with keyword is used to pass input to the action
+        with:
+          who-to-greet: 'Mona the Octocat'
+

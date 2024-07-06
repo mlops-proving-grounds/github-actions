@@ -9,13 +9,13 @@ jobs:
             - name: Setting an error message
               run: echo "::error::Missing semi-colon" 
             - name: Setting a error message with params
-              run: echo "::error title:Error title, file=app.js, line=10, endLine=13, col=15, endColumn=21::This is an error message"
+              run: echo "::error title=Error title, file=app.js, line=10, endLine=13, col=15, endColumn=21::This is an error message"
             - name: Setting a debug message with params
-              run: echo "::debug title:Debug title, file=app.js, line=10, endLine=13, col=15, endColumn=21::This is an debug message"
+              run: echo "::debug title=Debug title, file=app.js, line=10, endLine=13, col=15, endColumn=21::This is an debug message"
             - name: Setting a warning message with params
-              run: echo "::warning title:Warning title, file=app.js, line=10, endLine=13, col=15, endColumn=21::This is an warning message"
+              run: echo "::warning title=Warning title, file=app.js, line=10, endLine=13, col=15, endColumn=21::This is an warning message"
             - name: Setting a notice message with params
-              run: echo "::notice title:Notice title, file=app.js, line=10, endLine=13, col=15, endColumn=21::This is an notice message"
+              run: echo "::notice title=Notice title, file=app.js, line=10, endLine=13, col=15, endColumn=21::This is an notice message"
             - name: Group of logs
               run: |
                 echo "::group::Grouping logs title"

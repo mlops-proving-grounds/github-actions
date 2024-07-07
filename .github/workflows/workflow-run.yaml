@@ -10,6 +10,9 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Add a new comment
-              uses: actions/github-script@v6
+              uses: mshick/add-pr-comment@v2
               with:
-                script: return "Hello, world, bitches!"
+                message: |
+                 "Hello, 
+                 world, 
+                 bitches!"

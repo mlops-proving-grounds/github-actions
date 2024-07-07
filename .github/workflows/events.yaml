@@ -9,7 +9,7 @@ on:
         branches:
             # These are the branches that will trigger the workflow. If empty, all branches will trigger the workflow.
             - main
-            - feature/*
+            - feats/*
     pull_request:
         types: [opened, assigned, synchronize, reopened, closed]
     pull_request_target:

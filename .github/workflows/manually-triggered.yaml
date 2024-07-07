@@ -1,6 +1,8 @@
 name: Manually Triggered
 on:
     workflow_dispatch:
+        branches:
+            - 'feats/*'
 
 jobs:
     log-info:

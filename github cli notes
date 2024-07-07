@@ -33,3 +33,13 @@ NAME            STATE   ID
 First Workflow  active  105803331
 
  - you can use the ID instead of the name and get the same results
+
+
+##################################################################
+
+ TO SKIP RUNNING ACTIONS WHEN YOU COMMIT YOU NEED TO ADD `Some commit message [skip actions]`
+  - The `[skip actions]` will skip running any actions
+
+##################################################################
+
+

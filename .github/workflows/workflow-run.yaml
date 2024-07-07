@@ -4,7 +4,8 @@ name: Workflow Run
 on:
     workflow_run:
         workflows: [Repo Events]
-        types: [completed]
+        types: 
+            - completed
 jobs:
     add-new-comment:
         runs-on: ubuntu-latest

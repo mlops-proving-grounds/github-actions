@@ -1,9 +1,56 @@
 name: Manually Triggered
 on:
     workflow_dispatch:
-
+        inputs:
+            environment:
+                description: 'Environment to deploy to'
+                required: true
+                default: 'staging'
+            tag:
+                description: 'Tag to deploy'
+                required: false
+                default: 'v1.0'
+            branch:
+                description: 'Branch to deploy'
+                required: false
+                default: 'main'
+            message:
+                description: 'Message to deploy'
+                required: false
+                default: 'Deploying to staging'
+            string:
+                description: 'String to deploy'
+                type: string
+                required: false
+                default: 'Hello, world!'
+            number:
+                description: 'Number to deploy'
+                type: number
+                required: false
+                default: 42
+            boolean:
+                description: 'Boolean to deploy'
+                type: boolean
+                required: false
+                default: true
+            options:
+                description: 'Options to deploy'
+                type: choice
+                required: false
+                default: 'option1'
+                options:
+                    - 'option1'
+                    - 'option2'
+                    - 'option3'
 jobs:
     log-info:
         runs-on: ubuntu-latest
         steps:
             - run: echo $GITHUB_REF
+            - run: |
+                echo "String: ${{ github.event.inputs.string }}"
+                echo "Number: ${{ github.event.inputs.number }}"
+                echo "Boolean: ${{ github.event.inputs.boolean }}"
+                echo "Options: ${{ github.event.inputs.options }}"
+                echo "Environment: ${{ github.event.inputs.environment }}"
+                echo "Tag: ${{ github.event.inputs.tag }}"

@@ -6,10 +6,10 @@ on:
         workflows: [Repo Events]
         types: [completed]
 jobs:
-    add-comment:
+    add-new-comment:
         runs-on: ubuntu-latest
         steps:
-            - name: Comment on New PRs
+            - name: Add a new comment
               uses: actions/github-script@v6
               with:
                 

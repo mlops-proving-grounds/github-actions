@@ -1,0 +1,11 @@
+# This will trigger based on external events that are not on github.
+name: Repo Dispatch
+on:
+    repository_dispatch:
+
+jobs:
+    echo-a-string:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Echo a string
+              run: echo "Repo Dispatch Triggered"

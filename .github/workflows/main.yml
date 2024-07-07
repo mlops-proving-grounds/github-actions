@@ -12,4 +12,14 @@ jobs:
     echo-new-comment:
         runs-on: ubuntu-latest
         steps:
-            - run: echo "This is a new comment, because the other code sucks."
+            - name: Comment on New PRs
+              uses: actions/github-script@v6
+              with:
+                
+                script: |
+                    github.rest.issues.createComment({
+                        issue_number: context.issue.number,
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        body: 'Hello world, bitches!'
+                        })

@@ -7,13 +7,7 @@ on:
         types: 
             - completed
 jobs:
-    add-new-comment:
+    echo-new-comment:
         runs-on: ubuntu-latest
         steps:
-            - name: Add a new comment
-              uses: mshick/add-pr-comment@v2
-              with:
-                message: |
-                 "Hello, 
-                 world, 
-                 bitches!"
+            - run: echo "This is a new comment, because the other code sucks."

@@ -1,4 +1,5 @@
-name: Workflow Running
+
+name: Workflow Run
 # You can only have 3 layers of workflows.
 on:
     workflow_run:
@@ -12,14 +13,9 @@ jobs:
     echo-new-comment:
         runs-on: ubuntu-latest
         steps:
-            - name: Comment on New PRs
-              uses: actions/github-script@v6
-              with:
-                
-                script: |
-                    github.rest.issues.createComment({
-                        issue_number: context.issue.number,
-                        owner: context.repo.owner,
-                        repo: context.repo.repo,
-                        body: 'Hello world, bitches!'
-                        })
+        - uses: mshick/add-pr-comment@v2
+          with:
+            message: |
+                **Hello**
+                🌏
+                !

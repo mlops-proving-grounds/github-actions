@@ -5,8 +5,6 @@ on:
         workflows: [Repo Events]
         types:
             - completed
-        branches:
-            - main
 jobs:
     echo-string:
         runs-on: ubuntu-latest

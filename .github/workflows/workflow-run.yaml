@@ -1,10 +1,14 @@
 
-name: Pull Request Comment
+name: Workflow Run
 on:
-    pull_request:
-        types: [opened]
+    workflow_run:
+        workflows: [Repo Events]
+        types:
+            - completed
+        branches:
+            - main
 jobs:
-    pr-comment:
+    echo-string:
         runs-on: ubuntu-latest
         steps:
             - name: Comment on New PRs
@@ -16,5 +20,5 @@ jobs:
                         issue_number: context.issue.number,
                         owner: context.repo.owner,
                         repo: context.repo.repo,
-                        body: 'Thanks for opening this pull request!'
+                        body: 'I am a workflow run, that runs after the Repo Events workflow is completed! byukisha!'
                         })

@@ -1,4 +1,7 @@
 
+# For GitHub Event Actions, you can use the following events:
+# Additionally, when a pull request is opened from a forked repository, the pull_request event runs in the base repository as long as the setting is enabled in the base repository.
+# You can find this setting in the base repository under Settings > Actions > Allow all actions (or any other choice).
 name: Repo Events
 # on: [push, pull_request, issues]
 on:
@@ -8,6 +11,11 @@ on:
             - main
             - feature/*
     pull_request:
+        types: [opened, assigned, synchronize, reopened, closed]
+    pull_request_target:
+        # This event runs in the base repository when a pull request is opened from a forked repository.
+        # The base repository is the repository that the pull request is opened against.
+        # For example if the base is octo-org/octo-repo, the head could be forked-repo/octo-repo.
         types: [opened, assigned, synchronize, reopened, closed]
     issues:
         types: [opened, edited, deleted, closed, reopened, assigned, unassigned, labeled, unlabeled, locked, unlocked, milestoned, demilestoned]

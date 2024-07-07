@@ -6,12 +6,35 @@ name: Repo Events
 # on: [push, pull_request, issues]
 on:
     push:
+        # You cannot use both branches and branches-ignore at the same time.
+        # This will also only run when ALL conditions below are true.
         branches:
             # These are the branches that will trigger the workflow. If empty, all branches will trigger the workflow.
             - main
-            - feats/*
+            - '!main' # This will trigger the workflow for any branch that is not main
+            - 'feats/*' # This will trigger the workflow for any branch that starts with feats/
+            - 'feats/**' # This will trigger the workflow for any branch that starts with feats/ and has any number of subdirectories
+            - '!feats/experimental' # This will ignore the experimental branch
+        # branches-ignore:
+        #     - 'feats/experimental' # This will ignore the experimental branch
+        tags:
+            - v* # This will trigger the workflow for any tag that starts with v (which can be used for versioning)
+            - '!v1.0' # This will ignore the v1.0 tag
+        paths:
+            - 'src/**' # This will trigger the workflow for any changes in the src/ directory
+            - '!src/experimental/**' # This will ignore the src/experimental/ directory
     pull_request:
         types: [opened, assigned, synchronize, reopened, closed]
+        # You also use the branches, branches-ignore, paths options here but not tags.
+        branches:
+            - main
+            - '!main'
+            - 'feats/*'
+            - 'feats/**'
+            - '!feats/experimental'
+        paths:
+            - 'src/**'
+            - '!src/experimental/**'
     pull_request_target:
         # This event runs in the base repository when a pull request is opened from a forked repository.
         # The base repository is the repository that the pull request is opened against.

@@ -8,7 +8,7 @@ on:
             - completed
         branches:
             - main
-            - feats/*
+            - 'feats/*'
 jobs:
     echo-new-comment:
         runs-on: ubuntu-latest

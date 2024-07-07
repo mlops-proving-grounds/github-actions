@@ -1,0 +1,24 @@
+name: Stale Issues and PRs
+on:
+    schedule:
+        - cron: '0/1 * * * *' # This will run the workflow every day at midnight
+        # Each of the five asterisks represents a different time unit:
+        # minute (0-59), hour (0-23), day of the month (1-31), month (1-12), day of the week (0-7)
+
+jobs:
+    stale:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check for stale issues and PRs
+              uses: actions/stale@v8
+              with:
+                  repo-token: ${{ secrets.GITHUB_TOKEN }}
+                  stale-issue-message: 'This issue is stale because it has not had recent activity. Please let us know if this is still an issue.'
+                  stale-pr-message: 'This PR is stale because it has not had recent activity. Please let us know if this is still an issue.'
+                  days-before-stale: 60 # This is the number of days before an issue or PR is considered stale
+                  days-before-close: 7 # This is the number of days before a stale issue or PR is closed
+                  stale-issue-label: stale
+                  exempt-issue-labels: 'awaiting response, question'
+                  stale-pr-label: stale
+                  exempt-pr-labels: 'awaiting response, question'
+                  only: issues, pull-requests

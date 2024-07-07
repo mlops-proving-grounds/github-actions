@@ -5,7 +5,7 @@ on:
             environment:
                 description: 'Environment to deploy to'
                 required: true
-                default: 'staging'
+                type: environment
             tag:
                 description: 'Tag to deploy'
                 required: false

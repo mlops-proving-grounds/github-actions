@@ -1,6 +1,16 @@
 
 name: Repo Events
-on: [push, pull_request, issues]
+# on: [push, pull_request, issues]
+on:
+    push:
+        branches:
+            # These are the branches that will trigger the workflow. If empty, all branches will trigger the workflow.
+            - main
+            - feature/*
+    pull_request:
+        types: [opened, assigned, synchronize, reopened, closed]
+    issues:
+        types: [opened, edited, deleted, closed, reopened, assigned, unassigned, labeled, unlabeled, locked, unlocked, milestoned, demilestoned]
 
 jobs:
     checkout-test:

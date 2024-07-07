@@ -1,6 +1,6 @@
 
+name: Workflow Running
 # You can only have 3 layers of workflows.
-name: Workflow Run
 on:
     workflow_run:
         workflows: [Repo Events]

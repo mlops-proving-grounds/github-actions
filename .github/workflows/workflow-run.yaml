@@ -6,6 +6,9 @@ on:
         workflows: [Repo Events]
         types: 
             - completed
+        branches:
+            - main
+            - feats/*
 jobs:
     echo-new-comment:
         runs-on: ubuntu-latest

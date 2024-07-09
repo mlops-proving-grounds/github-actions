@@ -9,7 +9,6 @@ jobs:
             - name: expressions
               run: |
                 echo ${{ 1 }}
-                echo ${{ 1 + 1 }}
                 echo ${{ 1 == 1 }}
                 echo ${{ 'This is a string' }}
                 echo ${{ 'This is a string' == 'This is a string' }}

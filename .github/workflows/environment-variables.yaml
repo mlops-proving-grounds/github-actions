@@ -10,4 +10,4 @@ jobs:
               run: echo $GITHUB_REF
             - name: Log Context
             # This will be evaluateed by github actions before sending the workflow to the runner
-              run: echo ${{ toJson(github) }}
+              run: echo '${{ toJson(github.ref) }}'

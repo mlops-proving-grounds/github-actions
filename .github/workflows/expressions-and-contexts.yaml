@@ -1,12 +1,24 @@
 
 name: Expression and Contexts
 on: [push, pull_request, issues, workflow_dispatch]
-run-name: "Expressions and Contexts by @${{ github.actor }}, event: ${{ github.event_name }}"
+run-name: "Expressions and Contexts by @${{ github.actor }}, event: ${{ github.event_name }}" # This is a custom name for the run that will be displayed in the Actions tab.
 
 jobs:
+    # job-1
+    runs-on-issues-and-prs:
+        runs-on: ubuntu-latest
+        # Only run on issues or pull_request events. If a push is made, the workflow will not run and we will get a "skip" symbol instead of a fail.
+        if: contains(fromJson('["issues", "pull_request"]'), github.event_name)
+        steps:
+            - name: Run only if issue has a bug label
+              if: contains(github.event.issue.labels.*.name, 'bug')
+              run: echo ${{ join(github.event.issue.labels.*.name, ', ') }} # this should return the labels of the issue
+            
+    # job-2
     using-expressions-and-contexts:
         runs-on: ubuntu-latest
-        if: github.event_name == 'push' || github.event_name == 'pull_request'
+        # Only run on push. If an issue is created of edited, the workflow will not run and we will get a "skip" symbol instead of a fail.
+        if: github.event_name == 'push'
         steps:
             - name: expressions
               run: |

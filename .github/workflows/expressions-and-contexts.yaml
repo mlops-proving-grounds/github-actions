@@ -11,6 +11,8 @@ jobs:
         if: contains(fromJson('["issues", "pull_request"]'), github.event_name)
         steps:
             - name: Run only if issue has a bug label
+            # Using the label.*.name will return the names of all the labels of the issue. We can then use the contains function to check if the bug label is present.
+            # This is most useful when we want to run a job only if a specific label is present on many different types of events.
               if: contains(github.event.issue.labels.*.name, 'bug')
               run: echo ${{ join(github.event.issue.labels.*.name, ', ') }} # this should return the labels of the issue
             

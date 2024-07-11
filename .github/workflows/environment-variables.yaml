@@ -27,6 +27,11 @@ jobs:
                 echo "export MY_ENV_VAR_NAME=Hello World, Bitches" >> "$GITHUB_ENV"
                 echo "export MY_ENV_VAR_DATE=$(date)" >> "$GITHUB_ENV"
                 echo "export MY_ENV_VAR_RANDOM=$RANDOM" >> "$GITHUB_ENV"
+              # This is how you can set a multiline environment variable in a step
+              # echo "RANDOM_JOKE<<EOF" >> "$GITHUB_ENV"
+              # << $DELIMITER instantiates the end of the multiline variable
+              # Then anything between the two delimiters is the value of the variable
+              # << $DELIMITER (begins) and $DELIMITER >> (ends) - essentially
             - name: Multiline ENV VAR
               run: |
                     DELIMITER="EOF"

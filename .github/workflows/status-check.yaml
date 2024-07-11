@@ -4,11 +4,12 @@ on: [push]
 jobs:
     job-1:
         runs-on: ubuntu-latest
+        timeout-minutes: 1 
         steps:
             - name: Step 1
               run: sleep 61 # this is in seconds
               # You can add a timeout to a step that will cancel the job if it takes too long
-              timeout-minutes: 1 # this is in minutes
+              # timeout-minutes: 1 # this is in minutes
             - name: Step 2
               # We can give a step an id to reference it later
               id: step2

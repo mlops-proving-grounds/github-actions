@@ -24,7 +24,6 @@ jobs:
             - name: Set ENV VAR
               # This is how you can set an environment variable in a step "export MY_ENV_VAR_NAME=Value" >> $GITHUB_ENV
               run: |
-                echo "Setting an environment variable"
                 echo "export MY_ENV_VAR=Hello World" >> $GITHUB_ENV
                 echo "export MY_ENV_VAR_DATE=$(date)" >> $GITHUB_ENV
                 echo "export MY_ENV_VAR_RANDOM=$RANDOM" >> $GITHUB_ENV

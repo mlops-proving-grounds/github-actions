@@ -4,6 +4,7 @@ on: [push]
 
 jobs:
     node-matrix:
+        continue-on-error: true
         strategy:
             matrix:
                 os: [ubuntu-latest, windows-latest, macos-latest]

@@ -36,7 +36,7 @@ jobs:
                     echo '${{ env.STEP_LEVEL_ENV_VAR}}'
                     echo $STEP_LEVEL_ENV_VAR
                     echo $JOB_LEVEL_ENV_VAR
-                    echo $WF_LEVEL_ENV_VAR'
+                    echo $WF_LEVEL_ENV_VAR
                     echo $MY_ENV_VAR_NAME
                     echo $MY_ENV_VAR_DATE
                     echo $MY_ENV_VAR_RANDOM

@@ -6,6 +6,15 @@ on:
 jobs:
     pr-comment:
         runs-on: ubuntu-latest
+        # When you use the GITHUB_TOKEN, you should always set the permissions
+        # permissions: {} gives no permissions to anything
+        # permissions: read gives read permissions to everything
+        # permissions: write gives write permissions to everything
+        # permissions: maintain gives read/write permissions to everything
+        # permissions: triage gives read/write permissions to issues and read permissions to everything else
+        # permissions: admin gives read/write permissions to everything
+        # permissions: none gives no permissions to anything
+        # permissions: issues gives read/write permissions to issues
         permissions:
             contents: read
             issues: write
@@ -21,4 +30,4 @@ jobs:
                         owner: context.repo.owner,
                         repo: context.repo.repo,
                         body: 'Thanks for opening this pull request!'
-                        })
+                        }) 

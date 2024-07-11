@@ -4,12 +4,40 @@ on: [push]
 
 jobs:
     node-matrix:
-        continue-on-error: true
+        # continue-on-error: true # this will allow the other jobs to run even if one fails
         strategy:
             matrix:
                 os: [ubuntu-latest, windows-latest, macos-latest]
                 node-version: [13, 14, 15]
-            max-parallel: 3
+                # Include will only add new runs if the matrix includes values that are not already in the matrix
+                # Otherwise, it will replace the matrix with the values in the include with the values in the matrix
+                # include:
+                # {os: ubuntu-latest, node-version: 13, is-ubuntu: true, experimental: false} XX Won't run XX
+                # {os: ubuntu-latest, node-version: 14, is-ubuntu: true, experimental: false}
+                # {os: ubuntu-latest, node-version: 15, is-ubuntu: true, experimental: false}
+                # {os: windows-latest, node-version: 13, experimental: false}
+                # {os: windows-latest, node-version: 14, experimental: false}
+                # {os: windows-latest, node-version: 15, experimental: false}
+                # {os: macos-latest, node-version: 13, experimental: false}
+                # {os: macos-latest, node-version: 14, experimental: false}
+                # {os: macos-latest, node-version: 15, experimental: false}
+                # {os: ubuntu-latest, node-version: 16, is-ubuntu: true, experimental: true}
+                # {os: windows-latest, node-version: 17, experimental: true}
+                # {os: macos-latest, node-version: 18, experimental: true}
+                include: 
+                    - os: ubuntu-latest
+                      is-ubuntu: true
+                      node-version: 16
+                    - os: windows-latest
+                      node-version: 17
+                    - os: macos-latest
+                      node-version: 18
+                    - experimental: true
+                exclude:
+                    - os: ubuntu-latest
+                      node-version: 13
+            # max-parallel: 3
+            fail-fast: false # this will not cancel the other jobs even if one fails
         runs-on: ${{ matrix.os }}
         steps:
             - run: node -v

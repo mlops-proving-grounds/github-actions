@@ -21,6 +21,13 @@ jobs:
             - name: Log Context
             # This env variable will be evaluateed by github actions before sending the workflow to the runner
               run: echo '${{ toJson(github.ref) }}'
+            - name: Set ENV VAR
+              # This is how you can set an environment variable in a step "export MY_ENV_VAR_NAME=Value" >> $GITHUB_ENV
+              run: |
+                echo "Setting an environment variable"
+                echo "export MY_ENV_VAR=Hello World" >> $GITHUB_ENV
+                echo "export MY_ENV_VAR_DATE=$(date)" >> $GITHUB_ENV
+                echo "export MY_ENV_VAR_RANDOM=$RANDOM" >> $GITHUB_ENV
             - name: Log Custom ENV VAR
               env: 
                 # Step level environment variables are available to all steps in this job only
@@ -31,3 +38,6 @@ jobs:
                     echo $STEP_LEVEL_ENV_VAR
                     echo $JOB_LEVEL_ENV_VAR
                     echo $WF_LEVEL_ENV_VAR
+                    echo $MY_ENV_VAR
+                    echo $MY_ENV_VAR_DATE
+                    echo $MY_ENV_VAR_RANDOM

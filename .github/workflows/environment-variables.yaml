@@ -27,6 +27,14 @@ jobs:
                 echo "export MY_ENV_VAR_NAME=Hello World, Bitches" >> "$GITHUB_ENV"
                 echo "export MY_ENV_VAR_DATE=$(date)" >> "$GITHUB_ENV"
                 echo "export MY_ENV_VAR_RANDOM=$RANDOM" >> "$GITHUB_ENV"
+            - name: Multiline ENV VAR
+              run: |
+                    DELIMITER=1234
+                    echo "RANDOM_JOKE<<$DELIMITER" >> "$GITHUB_ENV"
+                    echo "Here is a joke: " >> "$GITHUB_ENV"
+                    curl -s hyyps://icanhazdadjoke.com/ >> "$GITHUB_ENV"
+                    echo "" >> "$GITHUB_ENV"
+                    echo "$DELIMITER" >> "$GITHUB_ENV"
             - name: Log Custom ENV VAR
               env: 
                 # Step level environment variables are available to all steps in this job only

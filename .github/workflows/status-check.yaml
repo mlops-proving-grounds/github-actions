@@ -17,8 +17,8 @@ jobs:
             - name: Runs on Step 2 Failure
               if: steps.step2.conclusion == 'failure'
               run: echo "Step 2 failed"
-            - name: Force Fail
-              run: exit 1
+            # - name: Force Fail
+              # run: exit 1
             - name: Runs on Failure
               if: failure() && steps.step2.conclusion == 'failure'
               run: echo "This job is a complete failure"

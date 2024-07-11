@@ -1,0 +1,56 @@
+name: Environment Variables
+on: [push]
+
+# Workflow level environment variables:
+# These are available to all jobs in the workflow
+env:
+  WF_LEVEL_ENV_VAR: "I am a workflow level environment variable"
+
+jobs:
+    env-vars-and-context:
+        runs-on: ubuntu-latest
+        # only use context to check the branch name. If you try to use $GIT_REF, it will not work
+        if: github.ref == 'refs/heads/main'
+        env:
+            # Job level environment variables are available to all steps in the job
+            JOB_LEVEL_ENV_VAR: "I am a job level environment variable"
+        steps:
+            - name: Log ENV VAR
+            # This an env variable is interpreted "before" processing on the runner machine
+              run: echo $GITHUB_REF
+            - name: Log Context
+            # This env variable will be evaluateed by github actions before sending the workflow to the runner
+              run: echo '${{ toJson(github.ref) }}'
+            - name: Set ENV VAR
+              # This is how you can set an environment variable in a step "export MY_ENV_VAR_NAME=Value" >> $GITHUB_ENV
+              run: |
+                echo "export MY_ENV_VAR_NAME=Hello World, Bitches" >> "$GITHUB_ENV"
+                echo "export MY_ENV_VAR_DATE=$(date)" >> "$GITHUB_ENV"
+                echo "export MY_ENV_VAR_RANDOM=$RANDOM" >> "$GITHUB_ENV"
+              # This is how you can set a multiline environment variable in a step
+              # echo "RANDOM_JOKE<<EOF" >> "$GITHUB_ENV"
+              # << $DELIMITER instantiates the end of the multiline variable
+              # Then anything between the two delimiters is the value of the variable
+              # << $DELIMITER (begins) and $DELIMITER >> (ends) - essentially
+            - name: Multiline ENV VAR
+              run: |
+                    DELIMITER="EOF"
+                    echo "RANDOM_JOKE<<$DELIMITER" >> "$GITHUB_ENV"
+                    echo "Here is a joke: " >> "$GITHUB_ENV"
+                    curl -s https://icanhazdadjoke.com/ >> "$GITHUB_ENV"
+                    echo "" >> "$GITHUB_ENV"
+                    echo "$DELIMITER" >> "$GITHUB_ENV"
+            - name: Log Custom ENV VAR
+              env: 
+                # Step level environment variables are available to all steps in this job only
+                STEP_LEVEL_ENV_VAR: "I am a custom environment variable"
+                WF_LEVEL_ENV_VAR: "I am overriding the workflow level environment variable"
+              run: |
+                    echo '${{ env.STEP_LEVEL_ENV_VAR}}'
+                    echo $STEP_LEVEL_ENV_VAR
+                    echo $JOB_LEVEL_ENV_VAR
+                    echo $WF_LEVEL_ENV_VAR
+                    echo $MY_ENV_VAR_NAME
+                    echo $MY_ENV_VAR_DATE
+                    echo $MY_ENV_VAR_RANDOM
+                    echo $RANDOM_JOKE

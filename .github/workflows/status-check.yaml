@@ -1,0 +1,39 @@
+name: Status Check Functions
+on: [push]
+
+jobs:
+    job-1:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Step 1
+              run: sleep 20
+            - name: Step 2
+              # We can give a step an id to reference it later
+              id: step2
+              run: exit 1
+              # This will run if the step with id step2 fails
+            - name: Runs on Step 2 Failure
+              if: steps.step2.conclusion == 'failure'
+              run: echo "Step 2 failed"
+            - name: Force Fail
+              run: exit 1
+            - name: Runs on Failure
+              if: failure() && steps.step2.conclusion == 'failure'
+              run: echo "This job is a complete failure"
+              # This is not really needed because it is the default behavior
+            - name: Runs on Success
+              if: success()
+              run: echo "This job succeeded"
+            - name: Alwats Runs
+            #   if success() || failure() <- this is techincally the same as always()
+              if: always()
+              run: echo "This job always runs"
+            - name: Runs on Cancel
+              if: cancelled()
+              run: echo "This job was cancelled"
+    job-2:
+        runs-on: ubuntu-latest
+        needs: job-1
+        if: failure()
+        steps:
+            - run: echo "This job only runs if job-1 fails"

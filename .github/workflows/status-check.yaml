@@ -20,6 +20,9 @@ jobs:
             - name: Runs on Failure
               if: failure() && steps.step2.conclusion == 'failure'
               run: echo "This job is a complete failure"
+            - name: Runs on Failure
+              if: failure()
+              run: echo "This whole check is a complete failure"
               # This is not really needed because it is the default behavior
             - name: Runs on Success
               if: success()

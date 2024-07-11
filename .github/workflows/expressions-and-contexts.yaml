@@ -1,0 +1,84 @@
+
+name: Expression and Contexts
+on: [push, pull_request, issues, workflow_dispatch]
+run-name: "Expressions and Contexts by @${{ github.actor }}, event: ${{ github.event_name }}" # This is a custom name for the run that will be displayed in the Actions tab.
+
+jobs:
+    # job-1
+    runs-on-issues-and-prs:
+        runs-on: ubuntu-latest
+        # Only run on issues or pull_request events. If a push is made, the workflow will not run and we will get a "skip" symbol instead of a fail.
+        if: contains(fromJson('["issues", "pull_request"]'), github.event_name)
+        steps:
+            - name: Run only if issue has a bug label
+            # Using the label.*.name will return the names of all the labels of the issue. We can then use the contains function to check if the bug label is present.
+            # This is most useful when we want to run a job only if a specific label is present on many different types of events.
+              if: contains(github.event.issue.labels.*.name, 'bug')
+              run: echo ${{ join(github.event.issue.labels.*.name, ', ') }} # this should return the labels of the issue
+            
+    # job-2
+    using-expressions-and-contexts:
+        runs-on: ubuntu-latest
+        # Only run on push. If an issue is created of edited, the workflow will not run and we will get a "skip" symbol instead of a fail.
+        if: github.event_name == 'push'
+        steps:
+            - name: expressions
+              run: |
+                echo ${{ 1 }}
+                echo ${{ 1 == 1 }}
+                echo ${{ 'This is a string' }}
+                echo ${{ 'This is a string' == 'This is a string' }}
+                echo ${{ null }}
+                echo ${{ false }}
+                echo ${{ 1 > 2 }}
+                echo ${{ true && false }}
+                echo ${{ true || (false && true) }}
+
+            - name: Dump Contexts
+              run: |
+                echo '${{ toJson(github) }}'
+                echo '${{ toJson(job) }}'
+                echo '${{ toJson(steps) }}'
+                echo '${{ toJson(secrets) }}'
+                echo '${{ toJson(runner) }}'
+
+            - name: Echo the current date
+              run: echo "The current date is $(date)"
+            - name: Echo the repository name
+              run: echo "The repository name is ${{ github.repository }}"
+            - name: Echo the repository owner
+              run: echo "The repository owner is ${{ github.repository_owner }}"
+            - name: Echo the event name
+              run: echo "The event name is ${{ github.event_name }}"
+            - name: Echo the event path
+              run: echo "The event path is ${{ github.event_path }}"
+            - name: Echo the event payload
+              run: echo "The event payload is ${{ github.event }}"
+            - name: Echo the event ref
+              run: echo "The event ref is ${{ github.ref }}"
+            - name: Echo the event sha
+              run: echo "The event sha is ${{ github.sha }}"
+            - name: Echo the event workflow
+              run: echo "The event workflow is ${{ github.workflow }}"
+            - name: Echo the event action
+              run: echo "The event action is ${{ github.event.action }}"
+            - name: Echo the event number
+              run: echo "The event number is ${{ github.event.number }}"
+            - name: Echo the event pull request number
+              run: echo "The event pull request number is ${{ github.event.pull_request.number }}"
+            - name: Echo the event issue number
+              run: echo "The event issue number is ${{ github.event.issue.number }}"
+            - name: Echo the event repository
+              run: echo "The event repository is ${{ github.event.repository }}"
+            - name: Echo the event sender
+              run: echo "The event sender is ${{ github.event.sender }}"
+            - name: Echo the event organization
+              run: echo "The event organization is ${{ github.event.organization }}"
+            - name: Echo the event installation
+              run: echo "The event installation is ${{ github.event.installation }}"
+            - name: Echo the event installation id
+              run: echo "The event installation id is ${{ github.event.installation.id }}"
+            - name: Echo the event installation account
+              run: echo "The event installation account is ${{ github.event.installation.account }}"
+            - name: Echo the event installation account id
+              run: echo "The event installation account id is ${{ github.event.installation.account.id }}"

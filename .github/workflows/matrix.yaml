@@ -4,10 +4,11 @@ on: [push]
 
 jobs:
     node-matrix:
-        runs-on: ${{ vars.JOBS_RUNNER }}
         strategy:
             matrix:
+                os: [${{ vars.JOBS_RUNNER }}, windows-latest, macos-latest]
                 node-version: [13, 14, 15]
+        runs-on: ${{ matrix.os }}
         steps:
             - run: node -v
             - uses: actions/setup-node@v3

@@ -1,6 +1,7 @@
 import os
 import math
 import sys
+import numpy as np
 from datetime import datetime
 import json
 import re
@@ -13,7 +14,8 @@ def hello_world():
   timestamp = now.strftime("%Y-%m-%d %H:%M:%S")
   print("Hello, World!")
   yet_another_unused_var = 54321
-  print(f"Current timestamp: {timestamp}")
+  x = np.array([1, 2, 3])
+  print(f"Current timestamp: {timestamp} and x: {x}")
 
 def process_data(data):
   for item in data:

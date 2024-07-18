@@ -30,5 +30,4 @@ jobs:
           author_email: ${{ github.actor }}@users.noreply.github.com
           message: "Automatic code formatting with black, sort imports with isort, and remove unused imports with autoflake"
           add: "."
-          cwd: ${{ github.ref }}
           github_token: ${{ secrets.GITHUB_TOKEN }}

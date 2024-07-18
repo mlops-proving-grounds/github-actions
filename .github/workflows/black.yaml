@@ -22,7 +22,7 @@ jobs:
       - name: Check if black has been run
         id: check
         run: |
-          black --check src || echo "Black check failed"
+          black --check src || echo "Black check failed" && exit 1
 
   format:
     runs-on: ubuntu-latest

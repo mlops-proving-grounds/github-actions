@@ -10,8 +10,7 @@ import re
 import numpy as np
 import os
 import math
-import sys
-from datetime import datetime
+import datetime
 import json
 import re
 
@@ -74,4 +73,4 @@ if __name__ == "__main__":
     )
 
     numbers1234 = []
-    
+

@@ -53,7 +53,7 @@ jobs:
           author_email: ${{ github.actor }}@users.noreply.github.com
           message: "Automatic code formatting with black, sort imports with isort, and remove unused imports with autoflake"
           add: "."
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          push: "origin ${GITHUB_REF}"
 
   recheck-black:
     runs-on: ubuntu-latest

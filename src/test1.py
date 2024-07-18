@@ -1,4 +1,5 @@
 import math
+import numpy as np
 import re
 from datetime import datetime
 
@@ -8,7 +9,8 @@ def hello_world():
     now = datetime.now()
     timestamp = now.strftime("%Y-%m-%d %H:%M:%S")
     print("Hello, World!")
-    print(f"Current timestamp: {timestamp}")
+    x = np.array([1, 2, 3])
+    print(f"Current timestamp: {timestamp} and x: {x}")
 
 
 def process_data(data):

@@ -4,7 +4,6 @@ import random
 from collections import defaultdict
 
 
-
 def generate_random_numbers(count):
     numbers = [random.randint(1, 100) for _ in range(count)]
     print(f"Generated numbers: {numbers}")

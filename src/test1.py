@@ -1,8 +1,8 @@
 import math
-import numpy as np
 import re
 from datetime import datetime
 
+import numpy as np
 
 
 def hello_world():

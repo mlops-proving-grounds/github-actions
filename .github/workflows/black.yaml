@@ -1,6 +1,9 @@
 name: Format code
 
-on: [push]
+on:
+  push:
+    branches:
+      - '**'
 
 jobs:
   format:
@@ -10,7 +13,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.x'  # Ensure Python version is set
+          python-version: '3.12'
       - name: Format code with black
         run: |
           pip install black

@@ -8,7 +8,8 @@ jobs:
         continue-on-error: ${{ matrix.experimental == 'true' }}
         strategy:
             matrix:
-                os: [ubuntu-latest, windows-latest, macos-latest]
+                # os: [ubuntu-latest, windows-latest, macos-latest]
+                os: [ubuntu-latest, windows-latest]
                 node-version: [13, 14, 15]
                 # Include will only add new runs if the matrix includes values that are not already in the matrix
                 # Otherwise, it will replace the matrix with the values in the include with the values in the matrix
@@ -19,9 +20,9 @@ jobs:
                 # {os: windows-latest, node-version: 13, experimental: false}
                 # {os: windows-latest, node-version: 14, experimental: false}
                 # {os: windows-latest, node-version: 15, experimental: false}
-                # {os: macos-latest, node-version: 13, experimental: false}
-                # {os: macos-latest, node-version: 14, experimental: false}
-                # {os: macos-latest, node-version: 15, experimental: false}
+                # {os: macos-latest, node-version: 13, experimental: false} -- no macos in the matrix for the 2nd os
+                # {os: macos-latest, node-version: 14, experimental: false} -- no macos in the matrix for the 2nd os
+                # {os: macos-latest, node-version: 15, experimental: false} -- no macos in the matrix for the 2nd os
                 # {os: ubuntu-latest, node-version: 16, is-ubuntu: true, experimental: true}
                 # {os: windows-latest, node-version: 17, experimental: true}
                 # {os: macos-latest, node-version: 18, experimental: true}

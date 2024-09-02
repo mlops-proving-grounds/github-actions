@@ -38,9 +38,11 @@ jobs:
                     - os: ubuntu-latest
                       node-version: 13
             # max-parallel: 3
-            fail-fast: false # this will not cancel the other jobs even if one fails
+            fail-fast: true # this will cancel the other jobs even if one fails
         runs-on: ${{ matrix.os }}
         steps:
+            - if: matrix.experimental == 'true'
+              run: echo "This is an experimental run"; exit 1
             - run: node -v
             - run: echo '${{ toJson(matrix) }}'
             - uses: actions/setup-node@v3

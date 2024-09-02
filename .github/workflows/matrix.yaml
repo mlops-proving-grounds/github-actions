@@ -5,7 +5,7 @@ on: [push]
 jobs:
     node-matrix:
         # continue-on-error: true # this will allow the other jobs to run even if one fails.
-        continue-on-error: ${{ matrix.experimental == 'true' }}
+        continue-on-error: ${{ matrix.experimental == 'false' }}
         strategy:
             matrix:
                 # os: [ubuntu-latest, windows-latest, macos-latest]

@@ -8,7 +8,9 @@ on:
                 required: true
                 default: 'main'
 
-concurrency: concurrency-1
+concurrency: 
+    group: concurrency-1
+    cancel-in-progress: true
 jobs:
     sleep:
         runs-on: ubuntu-latest

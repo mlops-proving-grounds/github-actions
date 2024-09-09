@@ -1,3 +1,6 @@
+# Regardless of the concurrency group, the workflow will run in the same job.
+# So, running the workflow with the same environment will cancel the previous run.
+# So we need to add a custom workflow name to differentiate the workflow runs.
 name: Concurrency 2
 run-name: Concurrency 2 (${{ github.event.inputs.environment }})
 on:
@@ -11,7 +14,9 @@ on:
 
 concurrency: 
     # group: concurrency-1
-    group: ${{ github.event.inputs.environment }}
+    # group: ${{ github.event.inputs.environment }}
+    group: ${{ github.workflow }}-${{ github.event.inputs.environment }}
+    # group: ${{ github.event.inputs.environment }}-${{ github.run_id }}
     # Set to true to cancel any in-progress runs in the same group. This will not cancel the current run.
     cancel-in-progress: true
 jobs:

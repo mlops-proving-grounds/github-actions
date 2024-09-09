@@ -1,6 +1,6 @@
 name: Calling Reusable Workflows
 on:
-    workdlow_dispatch:
+    workflow_dispatch:
         inputs:
             name:
                 description: 'Name of the workflow to run'

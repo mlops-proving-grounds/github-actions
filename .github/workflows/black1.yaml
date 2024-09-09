@@ -1,0 +1,36 @@
+name: Format code
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+      - name: Format code with black
+        run: |
+          pip install black
+          black --include="\.py" src
+      - name: Sort imports with isort
+        run: |
+          pip install isort
+          isort src
+      - name: Remove unused imports with autoflake
+        run: |
+          pip install autoflake
+          autoflake --in-place --remove-all-unused-imports --remove-unused-variables --recursive src
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: ${{ github.actor }}
+          author_email: ${{ github.actor }}@users.noreply.github.com
+          message: "Automatic code formatting with black, sort imports with isort, and remove unused imports with autoflake"
+          add: "."
+          github_token: ${{ secrets.GITHUB_TOKEN }}

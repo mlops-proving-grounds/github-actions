@@ -42,4 +42,8 @@ First Workflow  active  105803331
 
 ##################################################################
 
+The workflow that uses another workflow is called `Caller workflow`
+The reusable workflow is called `Called workflow`
+Both of these workflows can live in the same repo or even in different repos
+
 

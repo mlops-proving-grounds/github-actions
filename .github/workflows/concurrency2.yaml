@@ -15,8 +15,11 @@ on:
 concurrency: 
     # group: concurrency-1
     # group: ${{ github.event.inputs.environment }}
+    # giving the group a unique name by combining the workflow name and the environment name or the run id
     group: ${{ github.workflow }}-${{ github.event.inputs.environment }}
     # group: ${{ github.event.inputs.environment }}-${{ github.run_id }}
+    # This will cancel the previous run in the same group on the same branch only. So, different branches will not be affected.
+    # group: ${{ github.workflow }}-${{ github.ref }}
     # Set to true to cancel any in-progress runs in the same group. This will not cancel the current run.
     cancel-in-progress: true
 jobs:

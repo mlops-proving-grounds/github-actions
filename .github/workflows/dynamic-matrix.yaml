@@ -27,7 +27,7 @@ jobs:
       matrix-arrays: ${{ steps.matrix-arrays.outputs.result }}
     steps:
       - run: echo "Preparing matrix"
-      - uses: actions/github-script@v6
+      - uses: actions/github-script@v7
         id: matrix-arrays
         with:
           # javascript code to create the matrix

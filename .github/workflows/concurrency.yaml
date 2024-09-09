@@ -1,4 +1,5 @@
 name: Concurrency 1
+run-name: Concurrency 1 (${{ github.event.inputs.environment }})
 on:
     workflow_dispatch:
         inputs:
@@ -9,7 +10,9 @@ on:
                 default: 'main'
 
 concurrency: 
-    group: concurrency-1
+    # group: concurrency-1
+    group: ${{ github.event.inputs.environment }}
+    # Set to true to cancel any in-progress runs in the same group. This will not cancel the current run.
     cancel-in-progress: true
 jobs:
     sleep:

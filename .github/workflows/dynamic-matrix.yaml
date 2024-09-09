@@ -31,7 +31,7 @@ jobs:
         id: matrix-arrays
         with:
           # javascript code to create the matrix
-          script: "return {os: context.payload.inputs['os'].split(','), node-version: context.payload.inputs['node-version'].split(',')}"
+          script: "return {os: context.payload.inputs['os'].split(','), 'node-version': context.payload.inputs['node-version'].split(',')}"
           result-encoding: json
       - run: echo '${{ steps.matrix-arrays.outputs.result }}'
       - run: echo "step-output=value" >> $GITHUB_OUTPUT

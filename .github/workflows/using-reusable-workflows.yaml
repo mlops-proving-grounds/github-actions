@@ -3,18 +3,18 @@ on:
     workflow_dispatch:
         inputs:
             name:
-                description: 'Name of the workflow to run'
+                description: 'Input description'
                 type: string
-                default: 'my-workflow'
-                required: true
+                default: 'Vincent'
+                required: false
 jobs:
-    calling-reusable-workflows:
+    calling-a-reusable-workflow:
         # Use the workflow name provided in the input
         # make sure that we allow resuable workflows in the organization settings
         # org > settings > actions > general > allow resuable workflows
         uses: mlops-proving-grounds/reusable-workflow/.github/workflows/reusable.yaml@main
         with:
-            name: ${{ github.event.inputs.name }}
+            name: ${{ inputs.name }}
         # secrets: inherit # this will inherit and give all the secrets from the parent workflow
         secrets:
             access-token: ${{ secrets.ACCESS_TOKEN }}

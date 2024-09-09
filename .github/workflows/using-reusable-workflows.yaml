@@ -12,7 +12,7 @@ jobs:
         # Use the workflow name provided in the input
         # make sure that we allow resuable workflows in the organization settings
         # org > settings > actions > general > allow resuable workflows
-        uses: mlops-proving-grounds/reusable-workflows/.github/workflows/reusable.yaml@main
+        uses: mlops-proving-grounds/reusable-workflow/.github/workflows/reusable.yaml@main
         with:
             name: ${{ github.event.inputs.name }}
         # secrets: inherit # this will inherit and give all the secrets from the parent workflow

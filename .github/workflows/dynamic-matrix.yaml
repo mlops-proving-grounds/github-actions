@@ -23,8 +23,18 @@ on:
 jobs:
   prepare-matrix:
     runs-on: ubuntu-latest
+    outputs:
+      matrix-arrays: ${{ steps.github-script.outputs.result }}
     steps:
       - run: echo "Preparing matrix"
+      - uses: action.github-script@v6
+        id: matrix-arrays
+        with:
+          # javascript code to create the matrix
+          script: "return {os: context.payload.inputs['os'].split(','), node-version: context.payload.inputs['node-version'].split(',')}"
+          result-encoding: json
+      - run: echo '${{ steps.matrix-arrays.outputs.result }}'
+        id: matrix-arrays
       - run: echo "step-output=value" >> $GITHUB_OUTPUT
         id: step-1
       - run: echo "step-output=value 2" >> $GITHUB_OUTPUT
@@ -34,14 +44,15 @@ jobs:
           echo '${{ steps.step-2.outputs.step-output }}'
 
   node-matrix:
-      strategy:
-          matrix:
-              os: [ubuntu-latest, windows-latest]
-              node-version: [13, 14, 15]
-      runs-on: ${{ matrix.os }}
-      steps:
-          - run: node -v
-          - uses: actions/setup-node@v3
-            with:
-              node-version: ${{ matrix.node-version }}
-          - run: node -v
+    needs: prepare-matrix
+    strategy:
+        matrix:
+            os: ${{ fromJson(needs.prepare-matrix.outputs.matrix-arrays.os) }}
+            node-version: ${{ fromJson(needs.prepare-matrix.outputs.matrix-arrays.node-version) }}
+    runs-on: ${{ matrix.os }}
+    steps:
+        - run: node -v
+        - uses: actions/setup-node@v3
+          with:
+            node-version: ${{ matrix.node-version }}
+        - run: node -v

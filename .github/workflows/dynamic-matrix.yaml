@@ -1,55 +1,47 @@
 
-name: Matrix
-on: [push]
+name: Dynamic Matrix
+on:
+  workflow_dispatch:
+    inputs:
+      os:
+        description: 'Operating System'
+        required: true
+        default: 'ubuntu-latest'
+        options:
+          ubuntu-latest: 'Ubuntu'
+          windows-latest: 'Windows'
+          macos-latest: 'macOS'
+      node-version:
+        description: 'Node Version'
+        required: true
+        default: '14'
+        options:
+          13: '13'
+          14: '14'
+          15: '15'
 
 jobs:
-    node-matrix:
-        # continue-on-error: true # this will allow the other jobs to run even if one fails.
-        # continue-on-error: true
-        # using the ${{}} syntax to access the matrix values will allow jobs to run even if one fails
-        # and doesn't stop the other jobs from running. This also overrides the fail-fast: true.
-        continue-on-error: ${{ matrix.experimental == 'true' }}
-        strategy:
-            matrix:
-                # os: [ubuntu-latest, windows-latest, macos-latest]
-                os: [ubuntu-latest, windows-latest]
-                node-version: [13, 14, 15]
-                # Include will only add new runs if the matrix includes values that are not already in the matrix
-                # Otherwise, it will replace the matrix with the values in the include with the values in the matrix
-                # include:
-                # {os: ubuntu-latest, node-version: 13, is-ubuntu: true, experimental: false} XX Won't run XX
-                # {os: ubuntu-latest, node-version: 14, is-ubuntu: true, experimental: false}
-                # {os: ubuntu-latest, node-version: 15, is-ubuntu: true, experimental: false}
-                # {os: windows-latest, node-version: 13, experimental: false}
-                # {os: windows-latest, node-version: 14, experimental: false}
-                # {os: windows-latest, node-version: 15, experimental: false}
-                # {os: macos-latest, node-version: 13, experimental: false} -- no macos in the matrix for the 2nd os
-                # {os: macos-latest, node-version: 14, experimental: false} -- no macos in the matrix for the 2nd os
-                # {os: macos-latest, node-version: 15, experimental: false} -- no macos in the matrix for the 2nd os
-                # {os: ubuntu-latest, node-version: 16, is-ubuntu: true, experimental: true}
-                # {os: windows-latest, node-version: 17, experimental: true}
-                # {os: macos-latest, node-version: 18, experimental: true}
-                include: 
-                    - os: ubuntu-latest
-                      is-ubuntu: true
-                      node-version: 16
-                    - os: windows-latest
-                      node-version: 17
-                    - os: macos-latest
-                      node-version: 18
-                    - experimental: true
-                exclude:
-                    - os: ubuntu-latest
-                      node-version: 13
-            # max-parallel: 3
-            fail-fast: true # this will cancel the other jobs even if one fails
-        runs-on: ${{ matrix.os }}
-        steps:
-            - if: matrix.experimental == 'true'
-              run: exit 1
-            - run: node -v
-            - run: echo '${{ toJson(matrix) }}'
-            - uses: actions/setup-node@v3
-              with:
-                node-version: ${{ matrix.node-version }}
-            - run: node -v
+  prepare-matrix:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Preparing matrix"
+      - run: echo "step-output=value" >> $GITHUB_OUTPUT
+        id: step-1
+      - run: echo "step-output=value 2" >> $GITHUB_OUTPUT
+        id: step-2
+      - run: |
+          echo '${{ steps.step-1.outputs.step-output }}'
+          echo '${{ steps.step-2.outputs.step-output }}'
+
+  node-matrix:
+      strategy:
+          matrix:
+              os: [ubuntu-latest, windows-latest]
+              node-version: [13, 14, 15]
+      runs-on: ${{ matrix.os }}
+      steps:
+          - run: node -v
+          - uses: actions/setup-node@v3
+            with:
+              node-version: ${{ matrix.node-version }}
+          - run: node -v

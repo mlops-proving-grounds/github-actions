@@ -24,10 +24,10 @@ jobs:
   prepare-matrix:
     runs-on: ubuntu-latest
     outputs:
-      matrix-arrays: ${{ steps.github-script.outputs.result }}
+      matrix-arrays: ${{ steps.matrix-arrays.outputs.result }}
     steps:
       - run: echo "Preparing matrix"
-      - uses: action.github-script@v6
+      - uses: actions/github-script@v6
         id: matrix-arrays
         with:
           # javascript code to create the matrix

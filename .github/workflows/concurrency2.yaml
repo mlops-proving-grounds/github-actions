@@ -1,0 +1,21 @@
+name: Concurrency 2
+run-name: Concurrency 2 (${{ github.event.inputs.environment }})
+on:
+    workflow_dispatch:
+        inputs:
+            environment:
+                description: 'Environment to deploy to'
+                type: environment
+                required: true
+                default: 'main'
+
+concurrency: 
+    # group: concurrency-1
+    group: ${{ github.event.inputs.environment }}
+    # Set to true to cancel any in-progress runs in the same group. This will not cancel the current run.
+    cancel-in-progress: true
+jobs:
+    sleep:
+        runs-on: ubuntu-latest
+        steps:
+            - run: sleep 30

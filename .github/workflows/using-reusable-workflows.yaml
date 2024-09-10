@@ -1,22 +1,22 @@
 name: Calling Reusable Workflows
 on:
-    workflow_dispatch:
-        inputs:
-            name:
-                description: 'Input description'
-                type: string
-                default: 'Vincent'
-                required: false
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Input description'
+        type: string
+        default: 'Vincent'
+        required: false
 jobs:
-    calling-a-reusable-workflow:
-        # Use the workflow name provided in the input
-        # make sure that we allow resuable workflows in the organization settings
-        # org > settings > actions > general > allow resuable workflows
-        uses: mlops-proving-grounds/reusable-workflow/.github/workflows/reusable.yaml@a8f69349377f3651005a738afd91fe921fb7c736  # Replace 'main' with the appropriate branch or tag
-        with:
-            name: ${{ inputs.name }}
-        # secrets: inherit # this will inherit and give all the secrets from the parent workflow
-        secrets:
-            access-token: ${{ secrets.ACCESS_TOKEN }}
+  calling-a-reusable-workflow:
+    # Use the workflow name provided in the input
+    # make sure that we allow resuable workflows in the organization settings
+    # org > settings > actions > general > allow resuable workflows
+    uses: mlops-proving-grounds/reusable-workflow/.github/workflows/reusable.yaml@a8f69349377f3651005a738afd91fe921fb7c736  # Replace 'main' with the appropriate branch or tag
+    with:
+      name: ${{ inputs.name }}
+      # secrets: inherit # this will inherit and give all the secrets from the parent workflow
+      secrets:
+        access-token: ${{ secrets.ACCESS_TOKEN }}
 
             

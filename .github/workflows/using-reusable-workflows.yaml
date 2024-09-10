@@ -15,7 +15,7 @@ jobs:
     uses: mlops-proving-grounds/reusable-workflow/.github/workflows/reusable.yml@main  # Replace 'main' with the appropriate branch or tag
     with:
       name: ${{ inputs.name }}
-      secrets: inherit # this will inherit and give all the secrets from the parent workflow
+    #   secrets: inherit # this will inherit and give all the secrets from the parent workflow
     #   secrets: 
         # access-token: ${{ secrets.ACCESS_TOKEN }}
             

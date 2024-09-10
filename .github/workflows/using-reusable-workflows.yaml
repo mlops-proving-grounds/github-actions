@@ -8,7 +8,7 @@ on:
         default: 'Vincent'
         required: false
 jobs:
-  calling-a-reusable-workflow:
+  call-reusable-workflow:
     # Use the workflow name provided in the input
     # make sure that we allow resuable workflows in the organization settings
     # org > settings > actions > general > allow resuable workflows

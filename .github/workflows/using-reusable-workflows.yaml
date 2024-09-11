@@ -1,3 +1,4 @@
+# the repo that you are calling must be either public or internal - private repos didn't work for me
 name: Calling Reusable Workflows
 on:
   workflow_dispatch:
@@ -18,4 +19,6 @@ jobs:
     #   secrets: inherit # this will inherit and give all the secrets from the parent workflow
     #   secrets: 
         # access-token: ${{ secrets.ACCESS_TOKEN }}
+  calling-a-reuseable-ef-in-the-same-repo:
+    uses: ./.github/workflows/reusable-workflow.yaml
             

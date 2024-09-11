@@ -1,0 +1,46 @@
+# This is a reusable workflow that can be called by other workflows
+# The repo that it belongs to must be public or internal - private repo did not work for me
+name: Reusable Workflow
+on:
+  workflow_call:
+    inputs:
+      name: 
+        description: 'Input description'
+        type: string
+        default: 'Vincent'
+        required: false
+    secrets:
+      access-token:
+        description: 'Secret description'
+        required: false
+    outputs:
+      date:
+        description: 'Date output'
+        value: ${{ jobs.generate-output.outputs.date }}
+    
+
+jobs:
+  checkout:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - run: echo 'Checkout'
+  generate-output:
+    runs-on: ubuntu-latest
+    outputs:
+        date: ${{ steps.date-step.outputs.date }}
+    steps:
+      - run: echo 'Generate Output'
+      - run: echo "date=$(date)" >> $GITHUB_OUTPUT
+        id: date-steo
+
+  log-context-and-inputs:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'Context and Input'
+      - name: Display Github Context
+        run: echo '${{ toJson(github) }}'
+      - name: Display name input
+        run: echo '${{ inputs.name }}'
+      - name: Display access-token secret
+        run: echo '${{ secrets.access-token }}'

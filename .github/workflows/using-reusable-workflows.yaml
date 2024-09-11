@@ -25,6 +25,5 @@ jobs:
     uses: ubuntu-latest
     nees: calling-a-reuseable-ef-in-the-same-repo
     steps:
-        - run: echo 'Using Reusable Workflow Output'
         - run: echo "Date: ${{ needs.calling-a-reuseable-ef-in-the-same-repo.outputs.date }}"
             

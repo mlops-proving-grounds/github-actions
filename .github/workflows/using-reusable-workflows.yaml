@@ -9,16 +9,22 @@ on:
         default: 'Vincent'
         required: false
 jobs:
-  call-reusable-workflow:
+#   call-reusable-workflow:
     # Use the workflow name provided in the input
     # make sure that we allow resuable workflows in the organization settings
     # org > settings > actions > general > allow resuable workflows
-    uses: mlops-proving-grounds/reusable-workflow/.github/workflows/reusable.yaml@main  # Replace 'main' with the appropriate branch or tag
-    with:
-      name: ${{ inputs.name }}
+    # uses: mlops-proving-grounds/reusable-workflow/.github/workflows/reusable.yaml@main  # Replace 'main' with the appropriate branch or tag
+    # with:
+    #   name: ${{ inputs.name }}
     #   secrets: inherit # this will inherit and give all the secrets from the parent workflow
     #   secrets: 
         # access-token: ${{ secrets.ACCESS_TOKEN }}
   calling-a-reuseable-ef-in-the-same-repo:
     uses: ./.github/workflows/reusable-workflow.yaml
+  using-reusable-workflow-output:
+    uses: ubuntu-latest
+    nees: calling-a-reuseable-ef-in-the-same-repo
+    steps:
+        - run: echo 'Using Reusable Workflow Output'
+        - run: echo "Date: ${{ needs.calling-a-reuseable-ef-in-the-same-repo.outputs.date }}"
             

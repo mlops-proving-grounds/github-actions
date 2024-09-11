@@ -23,7 +23,7 @@ jobs:
     uses: ./.github/workflows/reusable-workflow.yaml
   using-reusable-workflow-output:
     uses: ubuntu-latest
-    nees: calling-a-reuseable-ef-in-the-same-repo
+    needs: calling-a-reuseable-ef-in-the-same-repo
     steps:
-        - run: echo "Date: ${{ needs.calling-a-reuseable-ef-in-the-same-repo.outputs.date }}"
+        - run: echo "Date:" ${{ needs.calling-a-reuseable-ef-in-the-same-repo.outputs.date }}
             

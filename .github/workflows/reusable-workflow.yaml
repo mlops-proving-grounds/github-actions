@@ -17,7 +17,6 @@ on:
       date:
         description: 'Date output'
         value: ${{ jobs.generate-output.outputs.date }}
-    
 
 jobs:
   checkout:
@@ -25,6 +24,14 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - run: echo 'Checkout'
+
+  nested-workflow-call:
+    uses: mlops-proving-grounds/reusable-workflow/.github/workflows/reusable.yaml@main  # Replace 'main' with the appropriate branch or tag
+    with:
+      name: ${{ inputs.name }}
+      secrets: 
+        access-token: ${{ secrets.ACCESS_TOKEN }}
+
   generate-output:
     runs-on: ubuntu-latest
     outputs:

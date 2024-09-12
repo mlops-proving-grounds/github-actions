@@ -31,7 +31,7 @@ jobs:
         date: ${{ steps.date-step.outputs.date }}
     steps:
       - run: echo "date=$(date)" >> $GITHUB_OUTPUT
-        id: date-steo
+        id: date-step
 
   log-context-and-inputs:
     runs-on: ubuntu-latest

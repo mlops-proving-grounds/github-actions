@@ -29,6 +29,8 @@ jobs:
     uses: mlops-proving-grounds/reusable-workflow/.github/workflows/reusable.yaml@main  # Replace 'main' with the appropriate branch or tag
     with:
       name: ${{ inputs.name }}
+      # because we are passing the secrets from the parent workflow we will be able to have access to the secrets in the nested workflow
+      # to have access to anything we need to pass it to the nested workflow
       secrets: 
         access-token: ${{ secrets.ACCESS_TOKEN }}
 

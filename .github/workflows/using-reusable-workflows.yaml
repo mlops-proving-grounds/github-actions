@@ -20,6 +20,10 @@ jobs:
     #   secrets: 
         # access-token: ${{ secrets.ACCESS_TOKEN }}
   calling-a-reuseable-wf-in-the-same-repo:
+    # you can set the permissions for the reusable workflow
+    permissions:
+      contents: read
+    # The path to the reusable workflow and only has read permissions
     uses: ./.github/workflows/reusable-workflow.yaml
     # if you are using a nested workflow you'll need to pass the secrets to the nested workflow
     secrets: inherit

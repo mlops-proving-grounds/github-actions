@@ -29,3 +29,9 @@ jobs:
               run: |
                 echo $API_URL
                 echo $ports
+            - name: Container in a Step
+              uses: docker://node:18.16-alpine3.17
+              with:
+                entrypoint: /usr/local/bin/node
+                # args are used instead of cmd in Dockerfile
+                args: -p 2+3

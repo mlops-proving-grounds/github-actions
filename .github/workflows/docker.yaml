@@ -35,3 +35,8 @@ jobs:
                 entrypoint: /usr/local/bin/node
                 # args are used instead of cmd in Dockerfile
                 args: -p 2+3
+            - name: Log node version
+              uses: docker://node:18.16-alpine3.17
+              with:
+                # args are used instead of cmd in Dockerfile
+                args: -v

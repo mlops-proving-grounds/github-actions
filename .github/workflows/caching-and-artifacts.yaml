@@ -30,6 +30,14 @@ jobs:
         name: code-coverage
         path: coverage
         retention-days: 1
+    - name: Download Code Coverage Report
+      uses: actions/download-artifact@v3
+      with:
+        name: code-coverage
+        path: code-coverage-report
+    - run: ls -al
+    - run: ls -al
+      working-directory: code-coverage-report
     - name: Use Axios
       uses: actions/github-script@v6
       with:

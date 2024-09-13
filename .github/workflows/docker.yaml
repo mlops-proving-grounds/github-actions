@@ -1,0 +1,32 @@
+name: Docker
+on: [workflow_dispatch]
+
+jobs:
+    docker-job:
+        runs-on: ubuntu-latest
+        container:
+          image: node:20.3-alpine3.17
+        #   If we are using a private Docker registry, we can authenticate with the following credentials:
+        #   credentials:
+        #     username: ${{ secrets.DOCKER_USERNAME }}
+        #     password: ${{ secrets.DOCKER_PASSWORD }}
+          env:
+            API_URL: https://api.example.com
+            ports: 
+                - 8080:8080
+            # volumes:
+            #     - vol_name: /path/in/container
+            #     - /var/lib/data
+            #     - /path/in/host:/path/in/container
+            # options: --cpus 1 --memory 512m
+        steps:
+            - name: Log Node & OS Versions
+              run: |
+                node -v
+                npm -v
+                uname -a
+                cat /etc/os-release
+            - name: Log Env
+              run: |
+                echo $API_URL
+                echo $ports

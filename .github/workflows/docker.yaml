@@ -47,3 +47,12 @@ jobs:
               with:
                 entrypoint: cat
                 args: hello.txt
+            - uses: actions/checkout@v2
+            - name: Run a bash script
+              uses: docker://node:18.16-alpine3.17
+              with:
+                entrypoint: ./script.sh
+                args: -c |
+                  echo 'echo "Hello, World!"' > script.sh
+                  chmod +x script.sh
+                  ./script.sh

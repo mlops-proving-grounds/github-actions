@@ -52,5 +52,4 @@ jobs:
               uses: docker://node:18.16-alpine3.17
               with:
                 entrypoint: ./script.sh
-                args: |
-                  "Hello, World!"
+                args: "Hello, World!"

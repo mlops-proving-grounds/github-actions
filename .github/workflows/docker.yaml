@@ -53,5 +53,5 @@ jobs:
               with:
                 entrypoint: ./script.sh
                 args: |
-                  echo "Hello, World!"
-                  chmod +x script.sh
+                  "Hello, World!"
+                #   chmod +x script.sh

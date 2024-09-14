@@ -42,3 +42,8 @@ jobs:
               with:
                 # args are used instead of cmd in Dockerfile
                 args: -v
+            - name: Show file contents
+              uses: docker://node:18.16-alpine3.17
+              with:
+                entrypoint: cat
+                args: hello.txt

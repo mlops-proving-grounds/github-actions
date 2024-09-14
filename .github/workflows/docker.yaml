@@ -29,6 +29,8 @@ jobs:
               run: |
                 echo $API_URL
                 echo $ports
+            - name: Create a file
+              run: echo 'Hello, World!' > hello.txt
             - name: Container in a Step
               uses: docker://node:18.16-alpine3.17
               with:

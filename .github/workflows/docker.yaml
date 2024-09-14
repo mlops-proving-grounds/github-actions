@@ -53,3 +53,13 @@ jobs:
               with:
                 entrypoint: ./script.sh
                 args: "Hello, World!"
+            - name: Send a Slack notification
+              uses: docker://technosophos/slack-notify
+              env:
+                SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+                SLACK_USERNAME: GitHub Actions Bot
+                SLACK_TITLE: "Hello, World!"
+                SLACK_MESSAGE: "This is a test message. Actor: ${{ github.actor }}, Repo: ${{ github.repository }}, SHA: ${{ github.sha }}, Ref: ${{ github.ref }}, event: ${{ github.event_name }}"
+                SLACK_COLOR: "#723fc4"
+                SLACK_ICON: "https://avatars.githubusercontent.com/u/44036562"
+                SLACK_CHANNEL: "#fuckin-botches-and-making-money"
